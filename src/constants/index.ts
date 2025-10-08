@@ -230,48 +230,55 @@ export const profileTabs = [
   },
 ];
 
-
 export const sidebarData: SidebarItem[] = [
-    {
-      title: "External Tenders",
-      icon: "folder-open",
-      href: "/external",
-    },
-    {
-      title: "Internal Tenders",
-      icon: "folder-open",
-      children: [
-        { title: "Tender Template", href: "/internal/tender-template" },
-        { title: "My Tenders", href: "/internal/my-tender" },
-        { title: "My Suppliers", href: "/internal/my-supplier" },
-      ],
-    },
-    {
-      title: "My Tender Responses",
-      icon: "file-box",
-      children: [
-        { title: "My Responses", href: "/responses/my-responses" },
-      ],
-    },
-    {
-      title: "Tender Historical Uploads",
-      icon: "history",
-      children: [
-        { title: "Tender uploads", href: "/historical-uploads/uploads" },
-        { title: "Tender response uploads", href: "/historical-uploads/tender-response" },
-      ],
-    },
-    {
-      title: "Analytics",
-      icon: "chart-pie",
-      children: [
-        { title: "Overview", href: "/analytics/overview" },
-        { title: "Reports", href: "/analytics/reports" },
-      ],
-    },
-    {
-      title: "Profile",
-      icon: "user-round",
-      href: "/profile",
-    },
-  ];
+  {
+    title: "External Tenders",
+    icon: "folder-open",
+    href: "/external",
+  },
+  {
+    title: "Internal Tenders",
+    icon: "folder-open",
+    children: [
+      { title: "Tender Template", href: "/internal/tender-template" },
+      { title: "My Tenders", href: "/internal/my-tender" },
+      { title: "My Suppliers", href: "/internal/my-supplier" },
+    ],
+  },
+  {
+    title: "My Tender Responses",
+    icon: "file-box",
+    children: [{ title: "My Responses", href: "/responses/my-responses" }],
+  },
+  {
+    title: "Tender Historical Uploads",
+    icon: "history",
+    children: [
+      { title: "Tender uploads", href: "/historical-uploads/uploads" },
+      {
+        title: "Tender response uploads",
+        href: "/historical-uploads/tender-response",
+      },
+    ],
+  },
+  {
+    title: "Analytics",
+    icon: "chart-pie",
+    children: [
+      { title: "Overview", href: "/analytics/overview" },
+      { title: "Reports", href: "/analytics/reports" },
+    ],
+  },
+  {
+    title: "Profile",
+    icon: "user-round",
+    href: "/profile",
+  },
+];
+
+export const regulationOptions = [
+  "Compliance with Local Laws and Regulations",
+  "Conflicts of Interest Declaration",
+  "Non-Disclosure Agreement (NDA)",
+  "Criminal Record Declaration",
+];

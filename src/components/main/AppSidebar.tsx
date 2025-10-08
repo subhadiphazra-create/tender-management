@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Home, Menu, PanelLeftClose } from "lucide-react";
+import { Home, PanelLeftClose } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
