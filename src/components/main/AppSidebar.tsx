@@ -11,60 +11,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { FolderOpen, FileText, BarChart3, User } from "lucide-react";
-import { SidebarItem } from "../../../types/type";
+import { sidebarData } from "@/constants";
+import Icon from "../icon";
 
 export default function AppSidebar() {
   const [openAccordion, setOpenAccordion] = useState<string | undefined>(
     undefined
   );
   const [isCollapsed, setIsCollapsed] = useState(false);
-
-
-  const sidebarData: SidebarItem[] = [
-    {
-      title: "External Tenders",
-      icon: <FolderOpen className="w-4 h-4 mr-2" />,
-      href: "/external",
-    },
-    {
-      title: "Internal Tenders",
-      icon: <FolderOpen className="w-4 h-4 mr-2" />,
-      children: [
-        { title: "Tender Template", href: "/internal/tender-template" },
-        { title: "My Tenders", href: "/internal/my-tender" },
-        { title: "My Suppliers", href: "/internal/my-supplier" },
-      ],
-    },
-    {
-      title: "My Tender Responses",
-      icon: <FileText className="w-4 h-4 mr-2" />,
-      children: [
-        { title: "My Responses", href: "/responses/my-responses" },
-      ],
-    },
-    {
-      title: "Tender Historical Uploads",
-      icon: <FileText className="w-4 h-4 mr-2" />,
-      children: [
-        { title: "Tender uploads", href: "/historical-uploads/uploads" },
-        { title: "Tender response uploads", href: "/historical-uploads/tender-response" },
-      ],
-    },
-    {
-      title: "Analytics",
-      icon: <BarChart3 className="w-4 h-4 mr-2" />,
-      children: [
-        { title: "Overview", href: "/analytics/overview" },
-        { title: "Reports", href: "/analytics/reports" },
-      ],
-    },
-    {
-      title: "Profile",
-      icon: <User className="w-4 h-4 mr-2" />,
-      href: "/profile",
-    },
-  ];
 
   return (
     <div className="relative">
@@ -75,14 +29,14 @@ export default function AppSidebar() {
           isCollapsed ? "w-20" : "min-w-72"
         )}
       >
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="text-gray-400 hover:text-white"
-          >
-            <PanelLeftClose className="w-5 h-5 text-white" />
-          </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="text-gray-400 hover:text-white"
+        >
+          <PanelLeftClose className="w-5 h-5 text-white" />
+        </Button>
         <div className="flex items-center justify-between mb-6 mt-2 px-2">
           <div className="flex items-center space-x-2">
             <Home className="w-5 h-5 text-white" />
@@ -110,8 +64,8 @@ export default function AppSidebar() {
                       "flex items-center justify-between w-full px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition-all"
                     )}
                   >
-                    <div className="flex items-center">
-                      {item.icon}
+                    <div className="flex items-center gap-2">
+                      <Icon name={item.icon} className="w-4 h-4" />
                       {!isCollapsed && item.title}
                     </div>
                   </AccordionTrigger>
@@ -134,9 +88,10 @@ export default function AppSidebar() {
               <Link
                 key={idx}
                 href={item.href ?? "#"}
-                className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition-all"
               >
-                {item.icon}
+                <Icon name={item.icon} className="w-4 h-4" />
+
                 {!isCollapsed && item.title}
               </Link>
             )

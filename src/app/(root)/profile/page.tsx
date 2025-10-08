@@ -1,71 +1,97 @@
 "use client";
 
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import Documents from "@/components/main/profile-components/Documents";
-import ProcurementInformation from "@/components/main/profile-components/ProcurementInformation";
-import ContactDetails from "@/components/main/profile-components/ContactDetails";
-import BasicInformation from "@/components/main/profile-components/BasicInformation";
+import Icon from "@/components/icon";
 import { UserRoundPen } from "lucide-react";
+import { profileTabs } from "@/constants";
+import TabRenderer from "@/components/main/profile-components/profile-data-render";
+import BuyerEditDialog from "@/components/main/profile-components/BuyerEdit/BuyerEditDialog";
+import SupplierEditDialog from "@/components/main/profile-components/SupplierEdit/SupplierEditDialog";
 
 export default function ProfilePage() {
+  const [activeMainTab, setActiveMainTab] = useState(profileTabs[0].id);
+  const [activeSubTab, setActiveSubTab] = useState(
+    profileTabs[0].subTabs[0].title
+  );
+
+  const activeMain = profileTabs.find((tab) => tab.id === activeMainTab);
+
   return (
     <div className="p-6 text-gray-100 bg-[#0b0b0b] max-h-screen w-full">
       {/* Header Row */}
       <div className="flex justify-between items-center mb-4">
-        <Tabs defaultValue="buyer" className="w-auto">
+        <Tabs
+          value={activeMainTab}
+          onValueChange={(val) => {
+            setActiveMainTab(val);
+            setActiveSubTab(
+              profileTabs.find((t) => t.id === val)?.subTabs[0].title ?? ""
+            );
+          }}
+          className="w-auto"
+        >
           <TabsList className="bg-gray-900 border border-gray-800">
-            <TabsTrigger value="buyer" className="data-[state=active]:bg-gray-800">
-              Buyer Details
-            </TabsTrigger>
-            <TabsTrigger value="supplier" className="data-[state=active]:bg-gray-800">
-           Supplier Details
-            </TabsTrigger>
+            {profileTabs.map((tab) => (
+              <TabsTrigger
+                key={tab.id}
+                value={tab.id}
+                className="flex items-center gap-2 data-[state=active]:bg-gray-800"
+              >
+                <Icon name={tab.icon} className="w-4 h-4" />
+                {tab.mainTabsTitle}
+              </TabsTrigger>
+            ))}
           </TabsList>
         </Tabs>
 
+        {/* Edit Buttons */}
         <div className="flex gap-2">
-          <Button variant="outline" className="bg-gray-900 border-gray-700 hover:bg-gray-800">
-            <UserRoundPen className="w-5 h-5" /> Edit Buyer Profile
-          </Button>
-          <Button variant="outline" className="bg-gray-900 border-gray-700 hover:bg-gray-800">
-            <UserRoundPen className="w-5 h-5" /> Edit Supplier Profile
-          </Button>
+          {profileTabs.map((tab) =>
+            tab.id === "1" ? (
+              <BuyerEditDialog
+                key={tab.id}
+                triggerText={`Edit ${tab.mainTabsTitle}`}
+              />
+            ) : (
+              <SupplierEditDialog
+                key={tab.id}
+                triggerText={`Edit ${tab.mainTabsTitle}`}
+              />
+            )
+          )}
         </div>
       </div>
 
-      {/* Content Tabs */}
-      <Tabs defaultValue="basic-info" className="mt-4">
-        <TabsList className="bg-gray-900 border border-gray-800">
-          <TabsTrigger value="basic-info" className="data-[state=active]:bg-gray-800">
-            Basic Information
-          </TabsTrigger>
-          <TabsTrigger value="contact" className="data-[state=active]:bg-gray-800">
-            Contact Details
-          </TabsTrigger>
-          <TabsTrigger value="procurement" className="data-[state=active]:bg-gray-800">
-            Procurement Information
-          </TabsTrigger>
-          <TabsTrigger value="documents" className="data-[state=active]:bg-gray-800">
-            Documents
-          </TabsTrigger>
-        </TabsList>
+      {/* Sub Tabs */}
+      {activeMain && (
+        <Tabs
+          value={activeSubTab}
+          onValueChange={(val) => setActiveSubTab(val)}
+          className="mt-4"
+        >
+          <TabsList className="bg-gray-900 border border-gray-800 flex flex-wrap w-full">
+            {activeMain.subTabs.map((sub) => (
+              <TabsTrigger
+                key={sub.title}
+                value={sub.title}
+                className="data-[state=active]:bg-gray-800 whitespace-nowrap"
+              >
+                {sub.title}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-        <div className="mt-6 bg-[#121212] border border-gray-800 rounded-lg p-6">
-          <TabsContent value="basic-info">
-            <BasicInformation />
-          </TabsContent>
-          <TabsContent value="contact">
-            <ContactDetails />
-          </TabsContent>
-          <TabsContent value="procurement">
-            <ProcurementInformation />
-          </TabsContent>
-          <TabsContent value="documents">
-            <Documents />
-          </TabsContent>
-        </div>
-      </Tabs>
+          <div className="mt-6 bg-[#121212] border border-gray-800 rounded-lg p-6">
+            {activeMain.subTabs.map((sub) => (
+              <TabsContent key={sub.title} value={sub.title}>
+                <TabRenderer fields={sub.fields} data={sub.data} />
+              </TabsContent>
+            ))}
+          </div>
+        </Tabs>
+      )}
     </div>
   );
 }
