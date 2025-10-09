@@ -1,4 +1,5 @@
-import { Buyer, SidebarItem, Supplier } from "../../types/type";
+import { TenderFormSchema } from "../../schema/tenderFormSchema";
+import { Buyer, SidebarItem, Supplier, TemplateFormValues } from "../../types/type";
 
 export const dummySupplier: Supplier = {
   companyName: "Acme Supplies Ltd.",
@@ -282,3 +283,122 @@ export const regulationOptions = [
   "Non-Disclosure Agreement (NDA)",
   "Criminal Record Declaration",
 ];
+<<<<<<< HEAD
+
+
+export const sampleTemplates: TemplateFormValues[] = [
+  {
+    templateName: "Tender Template A",
+    department: "Information Technology",
+    sector: "IT",
+    product: "IT infrastructure",
+    editorValue: "<p>Template A content</p>",
+  },
+  {
+    templateName: "Audit Template",
+    department: "Finance",
+    sector: "Insurance",
+    product: "Audit services",
+    editorValue: "<p>Audit template</p>",
+  },
+  {
+    templateName: "HR Onboarding",
+    department: "Human Resources",
+    sector: "Healthcare",
+    product: "Recruitment services",
+    editorValue: "<p>HR onboarding</p>",
+  },
+];
+
+export const dummyTenderData: TenderFormSchema[] = [
+  {
+    title: "Construction of New Office Building",
+    referenceNumber: "TND/INFRA/2025/001",
+    description:
+      "This tender invites qualified contractors for the construction of a new administrative office building including civil, electrical, and HVAC works.",
+    tenderType: "open",
+    procurementCategory: "works",
+    budget: 25000000,
+    industry: "Construction",
+    currency: "inr",
+    publicationDate: "2025-10-01",
+    submissionDeadline: "2025-10-30",
+    validityPeriod: 90,
+    projectDuration: "12 months",
+    organizationName: "Public Works Department",
+    department: "Infrastructure Development Division",
+    contactPerson: "Mr. Arjun Sharma",
+    contactEmail: "arjun.sharma@pwd.gov.in",
+    contactPhone: "+91-9876543210",
+    address: "PWD Bhawan, MG Road, Kolkata, West Bengal, India",
+    minTurnover: 50000000,
+    experienceYears: 5,
+    similarProjects:
+      "Construction of multi-storey government buildings, roads, and public offices.",
+    requiredCertifications: "ISO 9001:2015, Class A Contractor License",
+    legalRequirements: "Company registration, tax compliance certificates.",
+    financialStanding: "Audited financial statements for the last 3 years.",
+    technicalCapability: "Minimum 5 qualified engineers and project managers.",
+    scopeOfWork:
+      "Design, supply, and execution of all civil, plumbing, and electrical work for the new office building.",
+    technicalRequirements:
+      "Contractor must provide detailed technical methodology and implementation plan.",
+    qualityStandards:
+      "All materials should conform to IS standards and specifications.",
+    deliveryTimeline: "Completion within 12 months from work order date.",
+    acceptanceCriteria:
+      "Completion certificate issued after inspection and quality checks.",
+    performanceMetrics: "Project milestones, safety compliance, and quality benchmarks.",
+    requiredDeliverables: "Work completion report, drawings, material test certificates.",
+    technicalWeight: 70,
+    financialWeight: 30,
+    qualificationThreshold: 60,
+    evaluationMethodology: "quality_cost",
+    scoringSystem:
+      "Technical evaluation based on experience and resources, financial on lowest bid.",
+    bidSecurityAmount: 1000000,
+    bidSecurityForm: "bank_guarantee",
+    bidSecurityValidity: 120,
+    submissionMethod: "electronic",
+    copiesRequired: 2,
+    formatRequirements: "PDF format, digitally signed.",
+    supportingDocuments: "Company profile, project references, certifications.",
+    preQualificationDocs: "Audited balance sheets, turnover certificates.",
+    preBidMeeting: "2025-10-10",
+    siteVisit: "2025-10-12",
+    queryDeadline: "2025-10-15",
+    responseToQueries: "2025-10-18",
+    techBidOpening: "2025-10-31",
+    financeBidOpening: "2025-11-05",
+    paymentTerms: "Milestone-based payments after inspection approval.",
+    warrantyRequirements: "Minimum 2 years on all civil and electrical works.",
+    insuranceRequirements: "Contractor to provide workmen and site insurance.",
+    subContractingRules: "Maximum 30% of work can be subcontracted.",
+    contractAmendment: "Any amendment must be approved by the authority.",
+    disputeResolution:
+      "All disputes will be settled under arbitration in Kolkata jurisdiction.",
+    forceMajeure: "Standard government force majeure conditions apply.",
+    terminationConditions: "Poor performance or breach of contract terms.",
+    biddingDocs: "bidding_docs.pdf",
+    techSpecsDocs: "technical_specs.pdf",
+    draftContract: "draft_contract.pdf",
+    billQuantities: "boq.xlsx",
+    specialInstructions: "special_instructions.pdf",
+  },
+];
+
+export const currencySymbols = {
+  usd: "$",
+  eur: "€",
+  gbp: "£",
+  inr: "₹",
+  jpy: "¥",
+  aud: "A$",
+  cad: "C$",
+  cny: "¥",
+  chf: "CHF",
+  sek: "kr",
+  nzd: "NZ$",
+};
+=======
+>>>>>>> cdb2bbc819be25ae7f23e6d5d0159ade840b9cdc
