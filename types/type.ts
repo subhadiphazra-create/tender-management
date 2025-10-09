@@ -88,3 +88,126 @@ export interface Buyer {
   taxId?: string;
   bankingInfo?: string;
 }
+
+export interface TemplateFormValues {
+  templateName: string;
+  department: string;
+  sector: string;
+  product: string;
+  editorValue: string;
+}
+
+
+export type InputType = "text" | "number" | "email" | "tel" | "date" | "file" | "select";
+
+export type SelectOption = { label: string; value: string };
+
+export interface FormField {
+  name: string;
+  label: string;
+  type?: InputType;
+  placeholder?: string;
+  options?: SelectOption[];
+  isTextarea?: boolean;
+  colSpan?: number;
+  valueAsNumber?: boolean;
+}
+
+
+
+export type TenderType = "open" | "limited" | "direct";
+export type ProcurementCategory = "goods" | "services" | "works";
+export type Currency = "usd" | "eur" | "gbp" | "inr";
+export type BidSecurityForm = "bank_guarantee" | "cash_deposit";
+export type SubmissionMethod = "electronic" | "physical" | "both";
+export type EvaluationMethodology =
+  | "quality_cost"
+  | "least_cost"
+  | "fixed_budget"
+  | "quality_based";
+
+export interface TenderFormValues {
+  // Basic Tender Information
+  title: string;
+  referenceNumber: string;
+  description: string;
+  tenderType: TenderType;
+  procurementCategory: ProcurementCategory;
+  budget: number;
+  industry: string;
+  currency: Currency;
+  publicationDate: string;
+  submissionDeadline: string;
+  validityPeriod: number;
+  projectDuration: string;
+
+  // Procuring Entity Information
+  organizationName: string;
+  department?: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhone: string;
+  address: string;
+
+  // Eligibility Criteria
+  minTurnover: number;
+  experienceYears: number;
+  similarProjects?: string;
+  requiredCertifications?: string;
+  legalRequirements?: string;
+  financialStanding?: string;
+  technicalCapability?: string;
+
+  // Technical Specifications
+  scopeOfWork: string;
+  technicalRequirements?: string;
+  qualityStandards?: string;
+  deliveryTimeline?: string;
+  acceptanceCriteria?: string;
+  performanceMetrics?: string;
+  requiredDeliverables?: string;
+
+  // Evaluation Criteria
+  technicalWeight: number;
+  financialWeight: number;
+  qualificationThreshold: number;
+  evaluationMethodology?: EvaluationMethodology;
+  scoringSystem?: string;
+
+  // Bid Security
+  bidSecurityAmount: number;
+  bidSecurityForm: BidSecurityForm;
+  bidSecurityValidity?: number;
+
+  // Submission Requirements
+  submissionMethod: SubmissionMethod;
+  copiesRequired?: number;
+  formatRequirements?: string;
+  supportingDocuments?: string;
+  preQualificationDocs?: string;
+
+  // Schedule of Events
+  preBidMeeting?: string;
+  siteVisit?: string;
+  queryDeadline?: string;
+  responseToQueries?: string;
+  techBidOpening?: string;
+  financeBidOpening?: string;
+
+  // Terms and Conditions
+  paymentTerms?: string;
+  warrantyRequirements?: string;
+  insuranceRequirements?: string;
+  subContractingRules?: string;
+  contractAmendment?: string;
+  disputeResolution?: string;
+  forceMajeure?: string;
+  terminationConditions?: string;
+
+  // Attachments
+  biddingDocs?: FileList;
+  techSpecsDocs?: FileList;
+  draftContract?: FileList;
+  billQuantities?: FileList;
+  specialInstructions?: FileList;
+}
