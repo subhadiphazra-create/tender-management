@@ -21,7 +21,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { profileTabs } from "@/constants";
+import { profileTabs, regulationOptions } from "@/constants";
 import {
   SupplierFormType,
   supplierSchema,
@@ -39,10 +39,12 @@ export default function SupplierEditDialog({
 
   const supplierData = profileTabs.find((t) => t.id === "2")?.subTabs || [];
 
-  const { register, handleSubmit, setValue, watch } = useForm<SupplierFormType>({
-    resolver: zodResolver(supplierSchema),
-    defaultValues: supplierData[0].data,
-  });
+  const { register, handleSubmit, setValue, watch } = useForm<SupplierFormType>(
+    {
+      resolver: zodResolver(supplierSchema),
+      defaultValues: supplierData[0].data,
+    }
+  );
 
   const totalTabs = supplierData.length;
   const nextTab = () => setCurrentTab((p) => Math.min(p + 1, totalTabs - 1));
@@ -55,17 +57,13 @@ export default function SupplierEditDialog({
 
   const selectedRegulations = watch("regulations") || [];
 
-  const regulationOptions = [
-    "Compliance with Local Laws and Regulations",
-    "Conflicts of Interest Declaration",
-    "Non-Disclosure Agreement (NDA)",
-    "Criminal Record Declaration",
-  ];
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-gray-900 text-white border border-gray-700 hover:bg-gray-800">
+        <Button
+          className="bg-gray-900 text-white border border-gray-700 hover:bg-gray-800"
+          variant={"outline"}
+        >
           {triggerText}
         </Button>
       </DialogTrigger>
@@ -88,7 +86,7 @@ export default function SupplierEditDialog({
                   if (key === "supplierType")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Select
                           onValueChange={(val) =>
                             setValue(key as keyof SupplierFormType, val)
@@ -116,7 +114,7 @@ export default function SupplierEditDialog({
                   if (key === "taxCompliant")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Select
                           onValueChange={(val) =>
                             setValue(key as keyof SupplierFormType, val)
@@ -140,7 +138,7 @@ export default function SupplierEditDialog({
                   if (key === "legalStructure")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Select
                           onValueChange={(val) =>
                             setValue(key as keyof SupplierFormType, val)
@@ -168,7 +166,7 @@ export default function SupplierEditDialog({
                   if (key === "regulations")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-2">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <div className="space-y-2">
                           {regulationOptions.map((opt) => (
                             <label
@@ -180,7 +178,9 @@ export default function SupplierEditDialog({
                                 onCheckedChange={(checked) => {
                                   const newValues = checked
                                     ? [...selectedRegulations, opt]
-                                    : selectedRegulations.filter((v) => v !== opt);
+                                    : selectedRegulations.filter(
+                                        (v) => v !== opt
+                                      );
                                   setValue(
                                     key as keyof SupplierFormType,
                                     newValues
@@ -207,7 +207,7 @@ export default function SupplierEditDialog({
                   )
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Input
                           type="file"
                           className="bg-[#1a1a1a] border-gray-700 text-gray-100 p-2 rounded-md"
@@ -225,7 +225,7 @@ export default function SupplierEditDialog({
                   if (key === "date")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Input
                           type="date"
                           {...register(key as keyof SupplierFormType)}
@@ -237,7 +237,7 @@ export default function SupplierEditDialog({
                   // Default Input
                   return (
                     <div key={key} className="flex flex-col">
-                      <Label className="text-gray-300 mb-1">{label}</Label>
+                      <Label className="text-gray-300 mb-3">{label}</Label>
                       <Input
                         {...register(key as keyof SupplierFormType)}
                         className="bg-[#1a1a1a] border-gray-700 text-gray-100 p-2 rounded-md focus:ring-2 focus:ring-blue-500"

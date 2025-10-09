@@ -78,7 +78,7 @@ export default function BuyerEditDialog({
                   if (key === "businessType")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Select
                           onValueChange={(val) =>
                             setValue(key as keyof BuyerFormType, val)
@@ -107,7 +107,7 @@ export default function BuyerEditDialog({
                   if (key === "annualRevenue")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Select
                           onValueChange={(val) =>
                             setValue(key as keyof BuyerFormType, val)
@@ -136,7 +136,7 @@ export default function BuyerEditDialog({
                   if (key === "businessRegCert")
                     return (
                       <div key={key} className="flex flex-col">
-                        <Label className="text-gray-300 mb-1">{label}</Label>
+                        <Label className="text-gray-300 mb-3">{label}</Label>
                         <Input
                           type="file"
                           className="bg-[#1a1a1a] border-gray-700 text-gray-100 p-2 rounded-md"
@@ -153,7 +153,7 @@ export default function BuyerEditDialog({
                   // Default Input
                   return (
                     <div key={key} className="flex flex-col">
-                      <Label className="text-gray-300 mb-1">{label}</Label>
+                      <Label className="text-gray-300 mb-3">{label}</Label>
                       <Input
                         {...register(key as keyof BuyerFormType)}
                         className="bg-[#1a1a1a] border-gray-700 text-gray-100 p-2 rounded-md focus:ring-2 focus:ring-blue-500"

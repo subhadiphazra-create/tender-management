@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import Icon from "@/components/icon";
-import { UserRoundPen } from "lucide-react";
 import { profileTabs } from "@/constants";
 import TabRenderer from "@/components/main/profile-components/profile-data-render";
-import BuyerEditDialog from "@/components/main/profile-components/BuyerEdit/BuyerEditDialog";
-import SupplierEditDialog from "@/components/main/profile-components/SupplierEdit/SupplierEditDialog";
+import BuyerEditDialog from "@/components/main/profile-components/buyer-profile/BuyerEditDialog";
+import SupplierEditDialog from "@/components/main/profile-components/supplier-profile/SupplierEditDialog";
 
 export default function ProfilePage() {
   const [activeMainTab, setActiveMainTab] = useState(profileTabs[0].id);
