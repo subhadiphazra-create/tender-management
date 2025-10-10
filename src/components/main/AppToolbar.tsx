@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus, Filter, Eye } from "lucide-react";
 import { SmartSelect } from "../ui/smart-select";
+import CustomFormDialog from "./history-uploads/history-dialog/CustomFormDialog";
 
 export interface FilterOption {
   label: string;
@@ -19,7 +20,17 @@ interface AppToolbarProps {
   showCreateButton?: boolean;
   showViewButton?: boolean;
   onCreate?: () => void;
-  buttonText?:string;
+  buttonText?: string;
+  buttonIcon?: React.ReactNode; // ✅ custom icon for Create button
+
+  // ✅ Optional dialog props
+  showDialog?: boolean;
+  dialogTitle?: string;
+  dialogTriggerLabel?: string;
+  dialogFields?: any[];
+  dialogSchema?: any;
+  onDialogSubmit?: (data: any) => void;
+  dialogIcon?: React.ReactNode; // ✅ custom icon for Dialog trigger
 }
 
 export default function AppToolbar({
@@ -30,16 +41,20 @@ export default function AppToolbar({
   showViewButton,
   onCreate,
   buttonText,
+  buttonIcon,
+  showDialog = false,
+  dialogTitle,
+  dialogTriggerLabel,
+  dialogFields,
+  dialogSchema,
+  onDialogSubmit,
+  dialogIcon,
 }: AppToolbarProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [selectedColumns, setSelectedColumns] = useState<string[]>([
-    "templateName",
-    "department",
-    "sector",
-    "product",
-  ]);
+  const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
+  // Group filters by field type (e.g., column, department, etc.)
   const grouped = useMemo(() => {
     return filterOptions.reduce<Record<string, FilterOption[]>>((acc, opt) => {
       if (!acc[opt.field]) acc[opt.field] = [];
@@ -48,18 +63,18 @@ export default function AppToolbar({
     }, {});
   }, [filterOptions]);
 
-  const allOptions = [
-    { label: "Template Name", value: "templateName" },
-    { label: "Department", value: "department" },
-    { label: "Sector", value: "sector" },
-    { label: "Product", value: "product" },
-  ];
+  // ✅ View dropdown options come dynamically from filterOptions
+  const viewOptions = useMemo(
+    () => filterOptions.map((opt) => ({ label: opt.label, value: opt.value })),
+    [filterOptions]
+  );
 
   return (
-    <div className="flex mb-4">
-      {/* Left Section: Search + Filter */}
+    <div className="flex mb-4 justify-between items-center gap-4">
+      {/* 🔍 Left Section: Search + Filter */}
       <div className="flex items-center gap-2 w-full md:w-1/2">
-        <div className="w-full md:w-1/2 min-w-[220px]">
+        {/* Search Box */}
+        <div className="flex-1 min-w-[220px]">
           <Input
             placeholder="Search..."
             value={searchTerm}
@@ -70,7 +85,8 @@ export default function AppToolbar({
           />
         </div>
 
-        <div className="w-1/2">
+        {/* Filter Dropdown */}
+        <div className="flex-1 min-w-[200px]">
           <SmartSelect
             isMultiSelect
             placeholder={
@@ -87,19 +103,38 @@ export default function AppToolbar({
               onFilterChange(filters);
             }}
             showSearchbar
-            className={"w-1/2 overflow-hidden"}
+            className={"overflow-hidden"}
           />
         </div>
       </div>
 
-      {/* Right Section: Create + View */}
-      <div className="flex flex-wrap items-center justify-end gap-2 w-full md:w-1/2">
+      {/* 🧰 Right Section: Buttons + Dialog */}
+      <div className="flex items-center justify-end gap-2 w-full md:w-1/2 flex-wrap">
+        {/* Optional Custom Dialog */}
+        {showDialog && dialogFields && dialogSchema && (
+          <CustomFormDialog
+            fields={dialogFields}
+            schema={dialogSchema}
+            title={dialogTitle || "Custom Dialog"}
+            triggerLabel={
+              <div className="flex items-center gap-1">
+                {dialogIcon || <Plus className="w-4 h-4" />}
+                <span>{dialogTriggerLabel || "Open Dialog"}</span>
+              </div>
+            }
+            onSubmit={onDialogSubmit || (() => {})}
+          />
+        )}
+
+        {/* Create Button */}
         {showCreateButton && (
-          <Button onClick={onCreate} className="whitespace-nowrap">
-            <Plus className="w-4 h-4 mr-1" /> {buttonText}
+          <Button onClick={onCreate} className="whitespace-nowrap flex items-center gap-1">
+            {buttonIcon || <Plus className="w-4 h-4" />}
+            <span>{buttonText || "Create"}</span>
           </Button>
         )}
 
+        {/* View Column Selector */}
         {showViewButton && (
           <SmartSelect
             isMultiSelect
@@ -108,7 +143,7 @@ export default function AppToolbar({
                 <Eye className="w-4 h-4" /> <span>View</span>
               </div>
             }
-            options={allOptions}
+            options={viewOptions}
             value={selectedColumns}
             onChange={(vals) => {
               setSelectedColumns(vals as string[]);
@@ -117,7 +152,7 @@ export default function AppToolbar({
               onFilterChange(filters);
             }}
             showSearchbar
-            className={"w-1/4 overflow-hidden"}
+            className={"w-[200px] overflow-hidden"}
           />
         )}
       </div>

@@ -1,4 +1,5 @@
 import { FormField } from "../../types/type";
+import Countries from "./country";
 
 export const basicInfoFields: FormField[] = [
   {
@@ -408,6 +409,92 @@ export const attachmentsFields: FormField[] = [
   {
     name: "specialInstructions",
     label: "Special Instructions Document",
+    type: "file",
+  },
+];
+
+export const rfpFields: FormField[] = [
+  {
+    name: "rfpTitle",
+    label: "RFP Title",
+    placeholder: "Enter RFP Title",
+  },
+  {
+    name: "rfpDeadline",
+    label: "RFP Deadline",
+    type: "date",
+  },
+  {
+    name: "tender_department",
+    label: "Department",
+    placeholder: "Select Department",
+  },
+  {
+    name: "sector",
+    label: "Sector",
+    placeholder: "Select Sector",
+  },
+  {
+    name: "product_service",
+    label: "Product/Service",
+    placeholder: "Select Product/Service",
+  },
+  {
+    name: "country",
+    label: "Country",
+    type: "select",
+    placeholder: "Select Country",
+    options: Countries.map((c: any) => ({
+      label: c.countryName,
+      value: c.countryName,
+    })),
+  },
+  {
+    name: "file",
+    label: "Upload RFP Document",
+    type: "file",
+  },
+];
+
+export const responseFields: FormField[] = [
+  {
+    name: "responseTitle",
+    label: "Response Title",
+    placeholder: "Enter Response Title",
+  },
+  {
+    name: "responseDeadline",
+    label: "Response Deadline",
+    type: "date",
+  },
+  {
+    name: "department",
+    label: "Department",
+    placeholder: "Select Department",
+  },
+  {
+    name: "sector",
+    label: "Sector",
+    placeholder: "Select Sector",
+  },
+  {
+    name: "product_service",
+    label: "Product/Service",
+    placeholder: "Select Product/Service",
+  },
+  {
+    name: "country",
+    label: "Country",
+    type: "select",
+    placeholder: "Select Country",
+    options: Countries.map((c: any) => ({
+      label: c.countryName,
+      value: c.countryName,
+    })),
+  },
+  {
+    name: "file",
+    label: "Upload Response Document",
     type: "file",
   },
 ];

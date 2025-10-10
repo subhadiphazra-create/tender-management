@@ -1,3 +1,5 @@
+import { ResponseFormValues } from "../../schema/response-chema";
+import { RfpFormValues } from "../../schema/rfp-schema";
 import { TenderFormSchema } from "../../schema/tenderFormSchema";
 import { Buyer, SidebarItem, Supplier, TemplateFormValues } from "../../types/type";
 
@@ -311,6 +313,7 @@ export const sampleTemplates: TemplateFormValues[] = [
 
 export const dummyTenderData: TenderFormSchema[] = [
   {
+    id:"nnjfnrnnn133j4nkj4nkj",
     title: "Construction of New Office Building",
     referenceNumber: "TND/INFRA/2025/001",
     description:
@@ -399,3 +402,81 @@ export const currencySymbols = {
   sek: "kr",
   nzd: "NZ$",
 };
+
+export const responseData: ResponseFormValues[] = [
+  {
+    responseTitle: "IT Infrastructure Upgrade Proposal",
+    responseDeadline: "2025-10-25",
+    department: "Information Technology",
+    sector: "Public",
+    product_service: "Hardware Supply",
+    country: "India",
+    file: new File(["dummy"], "proposal_it_infra.pdf", { type: "application/pdf" }),
+  },
+  {
+    responseTitle: "Healthcare System Modernization Bid",
+    responseDeadline: "2025-11-05",
+    department: "Health Services",
+    sector: "Private",
+    product_service: "Software Development",
+    country: "USA",
+    file: new File(["dummy"], "healthcare_modernization.pdf", { type: "application/pdf" }),
+  },
+  {
+    responseTitle: "Road Construction Material Supply",
+    responseDeadline: "2025-10-30",
+    department: "Civil Engineering",
+    sector: "Government",
+    product_service: "Construction Materials",
+    country: "Canada",
+    file: new File(["dummy"], "road_materials_supply.pdf", { type: "application/pdf" }),
+  },
+  {
+    responseTitle: "Digital Marketing Campaign Proposal",
+    responseDeadline: "2025-11-15",
+    department: "Marketing",
+    sector: "Corporate",
+    product_service: "Marketing Services",
+    country: "UK",
+    file: new File(["dummy"], "digital_marketing_proposal.pdf", { type: "application/pdf" }),
+  },
+];
+
+export const rfpData: RfpFormValues[] = [
+  {
+    rfpTitle: "Smart City Development RFP",
+    rfpDeadline: "2025-12-01",
+    tender_department: "Urban Planning",
+    sector: "Public",
+    product_service: "Infrastructure Services",
+    country: "India",
+    file: new File(["dummy"], "smart_city_rfp.pdf", { type: "application/pdf" }),
+  },
+  {
+    rfpTitle: "Cloud Migration RFP",
+    rfpDeadline: "2025-11-20",
+    tender_department: "IT Operations",
+    sector: "Corporate",
+    product_service: "Cloud Solutions",
+    country: "Germany",
+    file: new File(["dummy"], "cloud_migration_rfp.pdf", { type: "application/pdf" }),
+  },
+  {
+    rfpTitle: "Educational Software Procurement",
+    rfpDeadline: "2025-10-31",
+    tender_department: "Education",
+    sector: "Government",
+    product_service: "Learning Management Systems",
+    country: "Australia",
+    file: new File(["dummy"], "edu_software_rfp.pdf", { type: "application/pdf" }),
+  },
+  {
+    rfpTitle: "Renewable Energy Equipment Supply",
+    rfpDeadline: "2025-11-10",
+    tender_department: "Energy and Resources",
+    sector: "Public",
+    product_service: "Solar Panels",
+    country: "UAE",
+    file: new File(["dummy"], "renewable_energy_rfp.pdf", { type: "application/pdf" }),
+  },
+];

@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
 
 export const tenderFormSchema = z.object({
+  id: z.string().default(() => uuidv4()),
   title: z.string().min(1, "Tender Subject is required"),
   referenceNumber: z.string().min(1, "Tender Reference Number is required"),
   description: z.string().min(1, "Project Description is required"),
@@ -17,7 +19,9 @@ export const tenderFormSchema = z.object({
   }),
   publicationDate: z.string().min(1, "Publication Date is required"),
   submissionDeadline: z.string().min(1, "Submission Deadline is required"),
-  validityPeriod: z.number().min(1, "Tender Validity Period must be at least 1 day"),
+  validityPeriod: z
+    .number()
+    .min(1, "Tender Validity Period must be at least 1 day"),
   projectDuration: z.string().min(1, "Expected Project Duration is required"),
 
   // Procuring Entity Information
@@ -53,12 +57,9 @@ export const tenderFormSchema = z.object({
     .number()
     .min(0)
     .max(100, "Qualification Threshold must be 0-100"),
-  evaluationMethodology: z.enum([
-    "quality_cost",
-    "least_cost",
-    "fixed_budget",
-    "quality_based",
-  ]).optional(),
+  evaluationMethodology: z
+    .enum(["quality_cost", "least_cost", "fixed_budget", "quality_based"])
+    .optional(),
   scoringSystem: z.string().optional(),
 
   // Bid Security

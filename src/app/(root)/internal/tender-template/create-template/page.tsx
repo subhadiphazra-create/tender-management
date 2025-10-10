@@ -5,7 +5,7 @@ import React from "react";
 export default function Page() {
   return (
     <div className="p-6 text-gray-100 bg-[#0b0b0b] max-h-screen w-full">
-        <PageBackHeader />
+        <PageBackHeader title="Create Template"  />
         <div >
           <TemplateForm />
         </div>

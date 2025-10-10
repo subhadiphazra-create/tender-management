@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface SidebarItem {
   title: string;
   icon?: React.ReactNode;
@@ -210,4 +212,23 @@ export interface TenderFormValues {
   draftContract?: FileList;
   billQuantities?: FileList;
   specialInstructions?: FileList;
+}
+
+
+export interface Country{
+    countryId : string,
+    countryName : string
+} 
+
+export interface Items {
+  name: string;
+  status: string;
+  color: string;
+  dropdown: boolean;
+}
+
+export interface RfpDraftActionBtns {
+  btnText: string;
+  btnIcon: ReactNode;
+  btnFn: () => void | Promise<void>;
 }

@@ -66,7 +66,7 @@ export default function SuppliersPage() {
       </div>
 
       {/* Pagination */}
-      <div className="mt-auto pt-4 flex justify-between items-center border-t pt-3 text-sm text-muted-foreground">
+      <div className="mt-auto flex justify-between items-center border-t pt-3 text-sm text-muted-foreground">
         <div>Total: {filteredData.length} rows</div>
         <AppPaginationControls
           page={page}
