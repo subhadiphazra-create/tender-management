@@ -92,6 +92,7 @@ export interface Buyer {
 }
 
 export interface TemplateFormValues {
+  id:string;
   templateName: string;
   department: string;
   sector: string;
@@ -231,4 +232,27 @@ export interface RfpDraftActionBtns {
   btnText: string;
   btnIcon: ReactNode;
   btnFn: () => void | Promise<void>;
+}
+
+export type StepStatus = "PENDING" | "IN PROGRESS" | "COMPLETED" | "REJECTED";
+
+export interface RfpDraft {
+  id: string;
+  title: string;
+  industry: string;
+  budget: number | null;
+  timeline: string | null;
+  additionalInfo: string | null;
+  stepTracker: {
+    "Draft Creation": StepStatus;
+    "Template Selection": StepStatus;
+    Draft: StepStatus;
+    Approval: StepStatus;
+    Publish: StepStatus;
+  };
+}
+
+export interface UserGroup {
+  id: string;
+  groupName: string;
 }

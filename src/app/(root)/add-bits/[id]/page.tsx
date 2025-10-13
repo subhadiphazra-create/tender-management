@@ -10,11 +10,12 @@ import {
 } from "@/constants";
 import { useParams } from "next/navigation";
 import React from "react";
-import { RfpDraft, UserGroup } from "../../../../../../types/type";
+import { RfpDraft, UserGroup } from "../../../../../types/type";
+import TenderDetailsBitsView from "@/components/main/tender-homepage/tender-bits-allocation/TenderDetailsBitsView";
 
 type Props = {};
 
-const TenderPage = (props: Props) => {
+const AddBitsPage = (props: Props) => {
   const { id } = useParams();
 
   const draftExtendedDetails: RfpDraft = dummyTenderExtendedData[0];
@@ -30,9 +31,9 @@ const TenderPage = (props: Props) => {
           currentUserGroups={currentUserGroups}
         />
       </div>
-      <TenderDetailsView details={dummyTenderData[0]} />
+      <TenderDetailsBitsView details={dummyTenderData[0]} />
     </div>
   );
 };
 
-export default TenderPage;
+export default AddBitsPage;

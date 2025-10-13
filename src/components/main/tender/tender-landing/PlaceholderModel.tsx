@@ -1,17 +1,44 @@
 // components/workflow/PlaceholderModal.tsx
 "use client";
+
 import React from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
-const PlaceholderModal = ({ isOpen, title }: { isOpen: boolean; title: string }) => {
-  if (!isOpen) return null;
+/**
+ * Small wrapper modal to avoid repeating Dialog markup.
+ * Children render inside the content area.
+ */
+export default function PlaceholderModal({
+  title,
+  open,
+  onClose,
+  children,
+}: {
+  title: string;
+  open: boolean;
+  onClose: () => void;
+  children?: React.ReactNode;
+}) {
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-[350px] text-center">
-        <h2 className="text-lg font-semibold mb-2">{title}</h2>
-        <p className="text-sm text-gray-600">This is a placeholder modal.</p>
-      </div>
-    </div>
-  );
-};
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
 
-export default PlaceholderModal;
+        <div className="py-2">{children}</div>
+
+        <DialogFooter>
+          {/* optionally add a close button if you'd like */}
+          <button className="px-3 py-1 rounded border" onClick={onClose}>Close</button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

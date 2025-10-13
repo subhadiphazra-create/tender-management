@@ -102,6 +102,7 @@ export const tenderFormSchema = z.object({
   draftContract: z.any().optional(),
   billQuantities: z.any().optional(),
   specialInstructions: z.any().optional(),
+  status:z.string().optional(),
 });
 
 export type TenderFormSchema = z.infer<typeof tenderFormSchema>;

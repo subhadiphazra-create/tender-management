@@ -23,23 +23,27 @@ export default function TenderDetailsView({ details }: { details: any }) {
               value="tender-details"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4 space-y-6"
             >
-              {tenderDetailsSections.map((section) => (
-                <DetailCard
-                  key={section.title}
-                  title={section.title}
-                  data={section.fields.map((field) => ({
-                    label: field.label,
-                    value: details[field.key] ?? "N/A",
-                  }))}
-                />
-              ))}
+                {tenderDetailsSections.map((section) => (
+                  <DetailCard
+                    key={section.title}
+                    title={section.title}
+                    data={section.fields.map((field) => ({
+                      label: field.label,
+                      value: details[field.key] ?? "N/A",
+                    }))}
+                  />
+                ))}
             </TabsContent>
 
             <TabsContent
               value="tender-content"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4"
             >
-              <ReadOnlyEditor height={725} onChange={() => {}} ref={editorRef} />
+              <ReadOnlyEditor
+                height={725}
+                onChange={() => {}}
+                ref={editorRef}
+              />
             </TabsContent>
           </div>
         </Tabs>

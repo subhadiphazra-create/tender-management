@@ -1,11 +1,13 @@
-import React from 'react'
+import TenderHomePageWithTabs from "@/components/main/tender-homepage/TenderHomePageWithTabs";
+import { dummyTenderData } from "@/constants";
 
-type Props = {}
+export default async function SupplierHomePage() {
 
-const page = (props: Props) => {
   return (
-    <div>page</div>
-  )
+    <TenderHomePageWithTabs
+      publishedDraftData={dummyTenderData}
+      // currentAccountBids={currentAccountBids}
+    />
+  );
+  //return <SupplierHomeComponent data={publishedDraftData} />;
 }
-
-export default page

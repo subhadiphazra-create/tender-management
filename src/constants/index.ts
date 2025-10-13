@@ -1,7 +1,14 @@
 import { ResponseFormValues } from "../../schema/response-chema";
 import { RfpFormValues } from "../../schema/rfp-schema";
 import { TenderFormSchema } from "../../schema/tenderFormSchema";
-import { Buyer, SidebarItem, Supplier, TemplateFormValues } from "../../types/type";
+import {
+  Buyer,
+  RfpDraft,
+  SidebarItem,
+  Supplier,
+  TemplateFormValues,
+  UserGroup,
+} from "../../types/type";
 
 export const dummySupplier: Supplier = {
   companyName: "Acme Supplies Ltd.",
@@ -237,7 +244,7 @@ export const sidebarData: SidebarItem[] = [
   {
     title: "External Tenders",
     icon: "folder-open",
-    href: "/external",
+    href: "/",
   },
   {
     title: "Internal Tenders",
@@ -286,9 +293,9 @@ export const regulationOptions = [
   "Criminal Record Declaration",
 ];
 
-
 export const sampleTemplates: TemplateFormValues[] = [
   {
+    id: "4387984fnehfbbdhebfbd",
     templateName: "Tender Template A",
     department: "Information Technology",
     sector: "IT",
@@ -296,6 +303,7 @@ export const sampleTemplates: TemplateFormValues[] = [
     editorValue: "<p>Template A content</p>",
   },
   {
+    id: "4387984fnehfbbhi43kj4b",
     templateName: "Audit Template",
     department: "Finance",
     sector: "Insurance",
@@ -303,6 +311,7 @@ export const sampleTemplates: TemplateFormValues[] = [
     editorValue: "<p>Audit template</p>",
   },
   {
+    id: "4387984fnehfbbdknsb",
     templateName: "HR Onboarding",
     department: "Human Resources",
     sector: "Healthcare",
@@ -313,7 +322,8 @@ export const sampleTemplates: TemplateFormValues[] = [
 
 export const dummyTenderData: TenderFormSchema[] = [
   {
-    id:"nnjfnrnnn133j4nkj4nkj",
+    id: "nnjfnrnnn133j4nkj4nkj",
+    status: "published",
     title: "Construction of New Office Building",
     referenceNumber: "TND/INFRA/2025/001",
     description:
@@ -350,8 +360,10 @@ export const dummyTenderData: TenderFormSchema[] = [
     deliveryTimeline: "Completion within 12 months from work order date.",
     acceptanceCriteria:
       "Completion certificate issued after inspection and quality checks.",
-    performanceMetrics: "Project milestones, safety compliance, and quality benchmarks.",
-    requiredDeliverables: "Work completion report, drawings, material test certificates.",
+    performanceMetrics:
+      "Project milestones, safety compliance, and quality benchmarks.",
+    requiredDeliverables:
+      "Work completion report, drawings, material test certificates.",
     technicalWeight: 70,
     financialWeight: 30,
     qualificationThreshold: 60,
@@ -411,7 +423,9 @@ export const responseData: ResponseFormValues[] = [
     sector: "Public",
     product_service: "Hardware Supply",
     country: "India",
-    file: new File(["dummy"], "proposal_it_infra.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "proposal_it_infra.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     responseTitle: "Healthcare System Modernization Bid",
@@ -420,7 +434,9 @@ export const responseData: ResponseFormValues[] = [
     sector: "Private",
     product_service: "Software Development",
     country: "USA",
-    file: new File(["dummy"], "healthcare_modernization.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "healthcare_modernization.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     responseTitle: "Road Construction Material Supply",
@@ -429,7 +445,9 @@ export const responseData: ResponseFormValues[] = [
     sector: "Government",
     product_service: "Construction Materials",
     country: "Canada",
-    file: new File(["dummy"], "road_materials_supply.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "road_materials_supply.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     responseTitle: "Digital Marketing Campaign Proposal",
@@ -438,7 +456,9 @@ export const responseData: ResponseFormValues[] = [
     sector: "Corporate",
     product_service: "Marketing Services",
     country: "UK",
-    file: new File(["dummy"], "digital_marketing_proposal.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "digital_marketing_proposal.pdf", {
+      type: "application/pdf",
+    }),
   },
 ];
 
@@ -450,7 +470,9 @@ export const rfpData: RfpFormValues[] = [
     sector: "Public",
     product_service: "Infrastructure Services",
     country: "India",
-    file: new File(["dummy"], "smart_city_rfp.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "smart_city_rfp.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     rfpTitle: "Cloud Migration RFP",
@@ -459,7 +481,9 @@ export const rfpData: RfpFormValues[] = [
     sector: "Corporate",
     product_service: "Cloud Solutions",
     country: "Germany",
-    file: new File(["dummy"], "cloud_migration_rfp.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "cloud_migration_rfp.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     rfpTitle: "Educational Software Procurement",
@@ -468,7 +492,9 @@ export const rfpData: RfpFormValues[] = [
     sector: "Government",
     product_service: "Learning Management Systems",
     country: "Australia",
-    file: new File(["dummy"], "edu_software_rfp.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "edu_software_rfp.pdf", {
+      type: "application/pdf",
+    }),
   },
   {
     rfpTitle: "Renewable Energy Equipment Supply",
@@ -477,6 +503,31 @@ export const rfpData: RfpFormValues[] = [
     sector: "Public",
     product_service: "Solar Panels",
     country: "UAE",
-    file: new File(["dummy"], "renewable_energy_rfp.pdf", { type: "application/pdf" }),
+    file: new File(["dummy"], "renewable_energy_rfp.pdf", {
+      type: "application/pdf",
+    }),
   },
+];
+
+export const dummyTenderExtendedData: RfpDraft[] = [
+  {
+    id: "nnjfnrnnn133j4nkj4nkj",
+    title: "Construction of New Office Building",
+    industry: "Construction",
+    budget: 25000000,
+    timeline: "12 months",
+    additionalInfo: "Urgent project for Q4 delivery",
+    stepTracker: {
+      "Draft Creation": "COMPLETED",
+      "Template Selection": "IN PROGRESS",
+      Draft: "PENDING",
+      Approval: "PENDING",
+      Publish: "PENDING",
+    },
+  },
+];
+
+export const dummyUserGroups: UserGroup[] = [
+  { id: "1", groupName: "Basic Data Access Group" },
+  { id: "2", groupName: "Admin Group" },
 ];
