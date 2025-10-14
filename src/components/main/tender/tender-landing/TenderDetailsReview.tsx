@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useRef } from "react";
 import { DetailCard } from "./DetailCard";
 import ReadOnlyEditor from "../../read-only-text-editor";
@@ -11,6 +12,7 @@ export default function TenderDetailsView({ details }: { details: any }) {
 
   return (
     <div className="relative w-full max-h-screen flex flex-col">
+      {/* Header with Tabs */}
       <div className="sticky top-0 z-10 bg-background shadow-sm px-4 py-2 border-b">
         <Tabs defaultValue="tender-details" className="w-full">
           <TabsList className="flex w-fit">
@@ -19,22 +21,29 @@ export default function TenderDetailsView({ details }: { details: any }) {
           </TabsList>
 
           <div className="relative flex-1">
+            {/* ✅ Tender Details tab with shadcn ScrollArea */}
             <TabsContent
               value="tender-details"
-              className="h-[calc(100vh-100px)] overflow-y-auto p-4 space-y-6"
+              className="p-0"
             >
-                {tenderDetailsSections.map((section) => (
-                  <DetailCard
-                    key={section.title}
-                    title={section.title}
-                    data={section.fields.map((field) => ({
-                      label: field.label,
-                      value: details[field.key] ?? "N/A",
-                    }))}
-                  />
-                ))}
+              <ScrollArea className="h-[calc(100vh-100px)] p-4">
+                <div className="space-y-6">
+                  {tenderDetailsSections.map((section) => (
+                    <DetailCard
+                      key={section.title}
+                      title={section.title}
+                      data={section.fields.map((field) => ({
+                        label: field.label,
+                        value: details[field.key] ?? "N/A",
+                      }))}
+                    />
+                  ))}
+                </div>
+                <ScrollBar orientation="vertical" />
+              </ScrollArea>
             </TabsContent>
 
+            {/* Tender Content tab (ReadOnly Editor) */}
             <TabsContent
               value="tender-content"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4"

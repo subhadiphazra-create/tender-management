@@ -21,10 +21,8 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileTabs } from "@/constants";
-import {
-  BuyerFormType,
-  buyerSchema,
-} from "../../../../../schema/buyerScema";
+import { BuyerFormType, buyerSchema } from "../../../../../schema/buyerScema";
+import PageBadge from "../PageBadge";
 
 interface Props {
   triggerText?: string;
@@ -55,7 +53,10 @@ export default function BuyerEditDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-gray-900 text-white border border-gray-700 hover:bg-gray-800" variant={"outline"}>
+        <Button
+          className="bg-gray-900 text-white border border-gray-700 hover:bg-gray-800"
+          variant={"outline"}
+        >
           {triggerText}
         </Button>
       </DialogTrigger>
@@ -67,7 +68,6 @@ export default function BuyerEditDialog({
             {buyerData[currentTab]?.title}
           </DialogTitle>
         </DialogHeader>
-
         {/* Form Scrollable Section */}
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <form className="space-y-6">
@@ -165,9 +165,8 @@ export default function BuyerEditDialog({
             </div>
           </form>
         </div>
-
-        {/* Footer with Buttons (Sticky Bottom) */}
-        <div className="px-6 py-4 border-t border-gray-800 flex justify-between bg-[#121212]">
+        <div className="px-6 py-4 border-t border-gray-800 flex items-center justify-between bg-[#121212]">
+          {/* Prev Button */}
           {currentTab > 0 ? (
             <Button
               variant="outline"
@@ -180,6 +179,10 @@ export default function BuyerEditDialog({
             <div />
           )}
 
+          {/* Page Badge */}
+          <PageBadge current={currentTab + 1} total={totalTabs} />
+
+          {/* Next / Submit Button */}
           <Button
             onClick={
               currentTab === totalTabs - 1 ? handleSubmit(onSubmit) : nextTab

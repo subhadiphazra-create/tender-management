@@ -26,6 +26,7 @@ import {
   SupplierFormType,
   supplierSchema,
 } from "../../../../../schema/supplierSchema";
+import PageBadge from "../PageBadge";
 
 interface Props {
   triggerText?: string;
@@ -75,7 +76,6 @@ export default function SupplierEditDialog({
             {supplierData[currentTab]?.title}
           </DialogTitle>
         </DialogHeader>
-
         {/* Form Section */}
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <form className="space-y-6">
@@ -249,9 +249,8 @@ export default function SupplierEditDialog({
             </div>
           </form>
         </div>
-
-        {/* Footer */}
-        <div className="px-6 py-4 border-t border-gray-800 flex justify-between bg-[#121212]">
+        <div className="px-6 py-4 border-t border-gray-800 flex items-center justify-between bg-[#121212]">
+          {/* Prev Button */}
           {currentTab > 0 ? (
             <Button
               variant="outline"
@@ -263,6 +262,11 @@ export default function SupplierEditDialog({
           ) : (
             <div />
           )}
+
+          {/* Page Badge */}
+          <PageBadge current={currentTab + 1} total={totalTabs} />
+
+          {/* Next / Submit Button */}
           <Button
             onClick={
               currentTab === totalTabs - 1 ? handleSubmit(onSubmit) : nextTab

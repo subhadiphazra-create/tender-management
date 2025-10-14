@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useRef } from "react";
 import ReadOnlyEditor from "../../read-only-text-editor";
 import { tenderDetailsSections } from "@/constants/tenderDetailsConfig";
@@ -17,79 +18,77 @@ export default function TenderDetailsBitsView({ details }: { details: any }) {
           <TabsList className="flex w-fit">
             <TabsTrigger value="tender-details">Tender Details</TabsTrigger>
             <TabsTrigger value="prerequisites">Prerequisites</TabsTrigger>
-            <TabsTrigger value="tender-documents">Tender documents</TabsTrigger>
+            <TabsTrigger value="tender-documents">Tender Documents</TabsTrigger>
             <TabsTrigger value="my-response">My Response</TabsTrigger>
           </TabsList>
 
           <div className="relative flex-1">
-            <TabsContent
-              value="tender-details"
-              className="h-[calc(100vh-100px)] overflow-y-auto p-4 space-y-6"
-            >
-              {tenderDetailsSections.map((section) => (
-                <DetailCard
-                  key={section.title}
-                  title={section.title}
-                  data={section.fields.map((field) => ({
-                    label: field.label,
-                    value: details[field.key] ?? "N/A",
-                  }))}
-                />
-              ))}
+            {/* ✅ Tender Details Tab — Now Wrapped in ScrollArea */}
+            <TabsContent value="tender-details" className="p-0">
+              <ScrollArea className="h-[calc(100vh-100px)] p-4">
+                <div className="space-y-6">
+                  {tenderDetailsSections.map((section) => (
+                    <DetailCard
+                      key={section.title}
+                      title={section.title}
+                      data={section.fields.map((field) => ({
+                        label: field.label,
+                        value: details[field.key] ?? "N/A",
+                      }))}
+                    />
+                  ))}
+                </div>
+                <ScrollBar orientation="vertical" />
+              </ScrollArea>
             </TabsContent>
 
+            {/* Prerequisites Tab */}
             <TabsContent
               value="prerequisites"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4"
             >
               <Tabs defaultValue="prerequisite-overview" className="w-full">
                 <TabsList className="flex w-fit">
-                  <TabsTrigger value="prerequisite-overview">Prerequisite Overview</TabsTrigger>
+                  <TabsTrigger value="prerequisite-overview">
+                    Prerequisite Overview
+                  </TabsTrigger>
                   <TabsTrigger value="supporting-documents">
-                    Supporting document
+                    Supporting Documents
                   </TabsTrigger>
                 </TabsList>
+
                 <TabsContent
                   value="prerequisite-overview"
                   className="h-[calc(100vh-100px)] overflow-y-auto p-4"
                 >
-                  <ReadOnlyEditor
-                    height={725}
-                    onChange={() => {}}
-                    ref={editorRef}
-                  />
+                  <ReadOnlyEditor height={685} onChange={() => {}} ref={editorRef} />
                 </TabsContent>
-                 <TabsContent
+
+                <TabsContent
                   value="supporting-documents"
                   className="h-[calc(100vh-100px)] overflow-y-auto p-4"
                 >
                   <Card>
-                    <CardContent>
-                      No files avilable
-                    </CardContent>
+                    <CardContent>No files available</CardContent>
                   </Card>
                 </TabsContent>
               </Tabs>
             </TabsContent>
+
+            {/* Tender Documents Tab */}
             <TabsContent
               value="tender-documents"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4"
             >
-              <ReadOnlyEditor
-                height={725}
-                onChange={() => {}}
-                ref={editorRef}
-              />
+              <ReadOnlyEditor height={725} onChange={() => {}} ref={editorRef} />
             </TabsContent>
+
+            {/* My Response Tab */}
             <TabsContent
               value="my-response"
               className="h-[calc(100vh-100px)] overflow-y-auto p-4"
             >
-              <ReadOnlyEditor
-                height={725}
-                onChange={() => {}}
-                ref={editorRef}
-              />
+              <ReadOnlyEditor height={725} onChange={() => {}} ref={editorRef} />
             </TabsContent>
           </div>
         </Tabs>

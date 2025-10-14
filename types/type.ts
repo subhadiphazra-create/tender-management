@@ -256,3 +256,35 @@ export interface UserGroup {
   id: string;
   groupName: string;
 }
+
+
+import { Status } from "@/utils/bidWorkflowData";
+
+export interface BidResponseSchema {
+  id: string;
+  title: string;
+  buyerOrganization: string;
+  tenderReference: string;
+  description: string;
+  industry: string;
+  currency: string;
+  budget: number;
+  timeline: string;
+  submissionDeadline: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactPhone: string;
+  responseType: "open" | "limited" | "direct";
+  additionalInfo?: string;
+}
+
+/** Extended workflow-tracked data (like RfpDraft) */
+export interface BidResponseWorkflow {
+  id: string;
+  title: string;
+  industry: string;
+  budget: number;
+  timeline: string;
+  additionalInfo?: string;
+  stepTracker: Record<string, Status>;
+}

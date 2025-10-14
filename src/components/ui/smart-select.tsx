@@ -49,7 +49,7 @@ interface SmartSelectProps {
   filterKey?: string;
   showFilter?: boolean;
   showSearchbar?: boolean;
-  className?: ClassNameProp; // 🔹 unified className prop
+  className?: ClassNameProp;
 }
 
 export function SmartSelect({
@@ -67,18 +67,28 @@ export function SmartSelect({
   const [search, setSearch] = React.useState("");
   const [filterValue, setFilterValue] = React.useState<string>("All");
 
-  // 🔹 Handle className prop (string or object)
+  // Refs for trigger width
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const [triggerWidth, setTriggerWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    if (triggerRef.current) {
+      setTriggerWidth(triggerRef.current.offsetWidth);
+    }
+  }, [triggerRef.current, open]);
+
+  // Class names
   const triggerClass = typeof className === "string" ? className : className?.trigger;
   const popoverClass = typeof className === "object" ? className?.popover : undefined;
   const optionClass = typeof className === "object" ? className?.option : undefined;
 
-  // 🔹 Unique filter values
+  // Filter values
   const filterValues =
     showFilter && filterKey
       ? ["All", ...Array.from(new Set(options.map((o) => o[filterKey])))]
       : [];
 
-  // 🔹 Filter logic
+  // Filtered options
   const filteredOptions = options.filter((opt) => {
     const matchesFilter =
       !showFilter || filterValue === "All" || opt[filterKey || ""] === filterValue;
@@ -99,7 +109,6 @@ export function SmartSelect({
     };
 
     const clearAll = () => onChange([]);
-
     const selectedOptions = options.filter((opt) =>
       selectedValues.includes(opt.value)
     );
@@ -108,6 +117,7 @@ export function SmartSelect({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
+            ref={triggerRef}
             variant="outline"
             role="combobox"
             aria-expanded={open}
@@ -163,7 +173,10 @@ export function SmartSelect({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className={cn("w-[300px] p-0", popoverClass)}>
+        <PopoverContent
+          className={cn("p-0", popoverClass)}
+          style={{ width: triggerWidth }} // ✅ dynamic width
+        >
           {showFilter && filterKey && (
             <div className="p-2 border-b">
               <Select value={filterValue} onValueChange={setFilterValue}>
@@ -198,7 +211,7 @@ export function SmartSelect({
                   <CommandItem
                     key={option.value}
                     onSelect={() => toggleValue(option.value)}
-                    className={cn("flex items-center", optionClass)}
+                    className={cn("flex items-center w-full", optionClass)}
                   >
                     <Check
                       className={cn(
@@ -208,7 +221,7 @@ export function SmartSelect({
                           : "opacity-0"
                       )}
                     />
-                    <div className="truncate max-w-[220px]">{option.label}</div>
+                    <div className="truncate w-full">{option.label}</div>
                     {filterKey && option[filterKey] && (
                       <span className="text-xs text-gray-400 ml-2">
                         ({option[filterKey]})
@@ -231,6 +244,7 @@ export function SmartSelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          ref={triggerRef}
           variant="outline"
           role="combobox"
           aria-expanded={open}
@@ -240,9 +254,7 @@ export function SmartSelect({
           )}
         >
           {selectedValue ? (
-            <div className="truncate max-w-[220px]">
-              {options.find((o) => o.value === selectedValue)?.label}
-            </div>
+            <div className="truncate">{options.find((o) => o.value === selectedValue)?.label}</div>
           ) : (
             <span className="text-muted-foreground">{placeholder}</span>
           )}
@@ -250,7 +262,10 @@ export function SmartSelect({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className={cn("w-[300px] p-0", popoverClass)}>
+      <PopoverContent
+        className={cn("p-0", popoverClass)}
+        style={{ width: triggerWidth }} // ✅ dynamic width
+      >
         {showFilter && filterKey && (
           <div className="p-2 border-b">
             <Select value={filterValue} onValueChange={setFilterValue}>
@@ -288,17 +303,15 @@ export function SmartSelect({
                     onChange(option.value);
                     setOpen(false);
                   }}
-                  className={cn("flex items-center", optionClass)}
+                  className={cn("flex items-center w-full", optionClass)}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      option.value === selectedValue
-                        ? "opacity-100"
-                        : "opacity-0"
+                      option.value === selectedValue ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  <div className="truncate max-w-[220px]">{option.label}</div>
+                  <div className="truncate w-full">{option.label}</div>
                   {filterKey && option[filterKey] && (
                     <span className="text-xs text-gray-400 ml-2">
                       ({option[filterKey]})

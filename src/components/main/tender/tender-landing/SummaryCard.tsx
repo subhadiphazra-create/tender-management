@@ -9,9 +9,10 @@ import { Tooltip } from "@/components/ui/tooltip";
 
 interface TenderDraftDetailsProps {
   draftDetails: any;
+  columns?:number;
 }
 
-export default function SummaryCard({ draftDetails }: TenderDraftDetailsProps) {
+export default function SummaryCard({ draftDetails,columns = 1 }: TenderDraftDetailsProps) {
   const momentObj = moment(draftDetails?.submissionDeadline);
   const isAfter = momentObj.isAfter(moment(), "day");
 
@@ -39,7 +40,7 @@ export default function SummaryCard({ draftDetails }: TenderDraftDetailsProps) {
   return (
     <div className="w-full">
       {/* Reusable Detail Card */}
-      <DetailCard title="Tender Details" data={tenderData} columns={1} />
+      <DetailCard title="Details" data={tenderData} columns={columns} />
     </div>
   );
 }

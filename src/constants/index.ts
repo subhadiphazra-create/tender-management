@@ -2,6 +2,8 @@ import { ResponseFormValues } from "../../schema/response-chema";
 import { RfpFormValues } from "../../schema/rfp-schema";
 import { TenderFormSchema } from "../../schema/tenderFormSchema";
 import {
+  BidResponseSchema,
+  BidResponseWorkflow,
   Buyer,
   RfpDraft,
   SidebarItem,
@@ -275,8 +277,8 @@ export const sidebarData: SidebarItem[] = [
     title: "Analytics",
     icon: "chart-pie",
     children: [
-      { title: "Overview", href: "/analytics/overview" },
-      { title: "Reports", href: "/analytics/reports" },
+      { title: "Buyer", href: "/analytics/buyer" },
+      { title: "Supplier", href: "/analytics/supplier" },
     ],
   },
   {
@@ -323,7 +325,7 @@ export const sampleTemplates: TemplateFormValues[] = [
 export const dummyTenderData: TenderFormSchema[] = [
   {
     id: "nnjfnrnnn133j4nkj4nkj",
-    status: "published",
+    status: "publis",
     title: "Construction of New Office Building",
     referenceNumber: "TND/INFRA/2025/001",
     description:
@@ -530,4 +532,48 @@ export const dummyTenderExtendedData: RfpDraft[] = [
 export const dummyUserGroups: UserGroup[] = [
   { id: "1", groupName: "Basic Data Access Group" },
   { id: "2", groupName: "Admin Group" },
+];
+
+
+
+export const dummyBidResponses: BidResponseSchema[] = [
+  {
+    id: "BID-2025-001",
+    title: "Response for Construction of New Office Building",
+    buyerOrganization: "Public Works Department",
+    tenderReference: "TND/INFRA/2025/001",
+    description:
+      "Supplier response for tender regarding construction of a new administrative building.",
+    industry: "Construction",
+    currency: "INR",
+    budget: 24000000,
+    timeline: "12 months",
+    submissionDeadline: "2025-10-30",
+    contactPerson: "Ms. Priya Mehta",
+    contactEmail: "priya.mehta@abcinfra.com",
+    contactPhone: "+91-9988776655",
+    responseType: "open",
+    additionalInfo: "Proposal includes green building materials and design.",
+  },
+];
+
+/** Extended workflow version (used by <BidWorkflow />) */
+export const dummyBidWorkflowData: BidResponseWorkflow[] = [
+  {
+    id: "BID-2025-001",
+    title: "Response for Construction of New Office Building",
+    industry: "Construction",
+    budget: 24000000,
+    timeline: "12 months",
+    additionalInfo: "Proposal under review by evaluation committee",
+    stepTracker: {
+      "Supplier Profile Review": "IN PROGRESS",
+      "Tender Analyzer": "PENDING",
+      "Response Template Selection": "PENDING",
+      "Response Draft": "PENDING",
+      "Draft Approval": "PENDING",
+      "Send for Bidding": "PENDING",
+      Negotiation: "PENDING",
+    },
+  },
 ];
